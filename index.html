@@ -20,101 +20,110 @@
             padding: 0;
             background: #121212; /* Base background color */
         }
+        /* Header */
+        /* Header */
+        .header {
+            background: #1e1e1e; /* Dark background for header */
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #f4f4f4;
+            position: fixed; /* Fixed position at the top */
+            top: 0;
+            left: 0;
+            width: 100%; /* Full width */
+            z-index: 1000; /* Ensure it appears above other content */
+            transition: background-color 0.3s; /* Optional: Transition for background color on scroll */
+        }
         
-        /* Header */
-        /* Header */
-.header {
-    background: #1e1e1e; /* Dark background for header */
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #f4f4f4;
-    position: fixed; /* Fixed position at the top */
-    top: 0;
-    left: 0;
-    width: 100%; /* Full width */
-    z-index: 1000; /* Ensure it appears above other content */
-    transition: background-color 0.3s; /* Optional: Transition for background color on scroll */
-}
-
-/* Adjust for mobile screens */
-.header .logo {
-    font-size: 1.5em;
-    color: #61dafb; /* Accent color for logo */
-    text-decoration: none;
-}
-
-.header .menu-icon,
-.header .close-icon {
-    display: none;
-}
-
-.header .navbar {
-    display: flex;
-    gap: 15px;
-}
-
-.header .navbar a {
-    color: #f4f4f4;
-    text-decoration: none;
-    font-size: 1em;
-    padding: 10px;
-    transition: color 0.3s, background-color 0.3s; /* Smooth transitions */
-    border-radius: 5px; /* Rounded corners for links */
-}
-
-.header .navbar a:hover,
-.header .navbar a.active {
-    color: #61dafb; /* Accent color on hover or active state */
-    background-color: #333; /* Darker background on hover */
-}
-
-//* Mobile Menu */
-.menu-icon {
-    display: block; /* Show menu icon on mobile screens */
-}
-
-.navbar {
-    display: flex;
-    gap: 15px;
-}
-.navbar {
-    display: flex;
-    gap: 15px;
-}
-
-.navbar.active {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    background: #1e1e1e; /* Match header background */
-    position: fixed; /* Keep the navbar fixed */
-    top: 60px; /* Adjust based on header height */
-    left: 0;
-    padding: 10px 0;
-    z-index: 1000; /* Ensure it appears above other content */
-    transform: translateY(-100%); /* Start hidden */
-    transition: transform 0.3s; /* Smooth transition */
-}
-
-.navbar.active.show {
-    transform: translateY(0); /* Slide down when active */
-}
-
-.navbar a {
-    padding: 15px;
-    text-align: center;
-}
-
-.close-icon {
-    display: block;
-    font-size: 1.5em;
-    cursor: pointer;
-    color: #f4f4f4;
-    text-align: right;
-    padding: 10px;
-}
+        /* Logo */
+        .header .logo {
+            font-size: 1.5em;
+            color: #61dafb; /* Accent color for logo */
+            text-decoration: none;
+        }
+        
+        /* Menu Icon (Visible on small screens) */
+        .menu-icon {
+            display: none; /* Hidden by default */
+        }
+        
+        /* Close Icon (Visible only when navbar is active) */
+        .close-icon {
+            display: none; /* Hidden by default */
+        }
+        
+        /* Navbar */
+        .header .navbar {
+            display: flex;
+            gap: 15px; /* Space between links */
+        }
+        
+        /* Navbar Links */
+        .header .navbar a {
+            color: #f4f4f4;
+            text-decoration: none;
+            font-size: 1em;
+            padding: 10px;
+            transition: color 0.3s, background-color 0.3s; /* Smooth transitions */
+            border-radius: 5px; /* Rounded corners for links */
+        }
+        
+        /* Navbar Link Hover and Active States */
+        .header .navbar a:hover,
+        .header .navbar a.active {
+            color: #61dafb; /* Accent color on hover or active state */
+            background-color: #333; /* Darker background on hover */
+        }
+        
+        /* Mobile Menu */
+        .navbar {
+            display: none; /* Hide navbar by default on small screens */
+        }
+        
+        /* Navbar is shown when 'active' and 'show' classes are applied */
+        .navbar.active {
+            display: flex; /* Show navbar when active */
+            flex-direction: column;
+            width: 100%;
+            background: #1e1e1e; /* Match header background */
+            position: fixed; /* Keep the navbar fixed */
+            top: 60px; /* Adjust based on header height */
+            left: 0;
+            padding: 10px 0;
+            z-index: 1000; /* Ensure it appears above other content */
+            transform: translateY(-100%); /* Start hidden */
+            transition: transform 0.3s; /* Smooth transition */
+        }
+        
+        /* Show navbar when 'show' class is applied */
+        .navbar.active.show {
+            transform: translateY(0); /* Slide down when active */
+        }
+        
+        /* Navbar Links in Mobile View */
+        .navbar a {
+            padding: 15px;
+            text-align: center;
+        }
+        
+        /* Show Menu Icon and Close Icon on Small Screens */
+        @media (max-width: 768px) {
+            .menu-icon {
+                display: block; /* Show menu icon on small screens */
+            }
+        
+            .navbar.active .close-icon {
+                display: block; /* Show close icon when navbar is active */
+            }
+        
+            /* Ensure the navbar is hidden by default */
+            .header .navbar {
+                display: none; /* Hide navbar by default on small screens */
+            }
+        }
+        
 
         /* Home Section */
         .home {
@@ -936,7 +945,7 @@
                     </a>
                 </div>
                 <div class="portfolio-item" data-aos="fade-up" data-aos-delay="100">
-                    <a href="https://github.com/yourusername/project2" target="_blank" class="portfolio-link">
+                    <a href="https://github.com/Nickson06/posters.git" target="_blank" class="portfolio-link">
                         <img src="project2.jpg" alt="Project 2">
                         <div class="portfolio-overlay">
                             <h3>Project Title 2</h3>
@@ -1018,239 +1027,126 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 
     <script>
-        AOS.init({
-            duration: 1200,
-        });
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS (Animate On Scroll)
             AOS.init({
                 duration: 1000, // Animation duration in ms
                 once: true // Whether animation should happen only once
             });
-        });
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuIcon = document.getElementById('menu-icon');
-            const closeIcon = document.getElementById('close-icon');
-            const navbar = document.getElementById('navbar');
-        
-            // Toggle navbar visibility
-            menuIcon.addEventListener('click', function() {
-                navbar.classList.add('active', 'show');
-            });
-        
-            closeIcon.addEventListener('click', function() {
-                navbar.classList.remove('show');
-                setTimeout(() => navbar.classList.remove('active'), 300); // Delay removal to match transition time
-            });
-        
-            // Close navbar when clicking outside
-            document.addEventListener('click', function(event) {
-                if (!navbar.contains(event.target) && !menuIcon.contains(event.target)) {
+            document.addEventListener('DOMContentLoaded', function() {
+                const menuIcon = document.getElementById('menu-icon');
+                const closeIcon = document.getElementById('close-icon');
+                const navbar = document.getElementById('navbar');
+            
+                // Toggle navbar visibility
+                menuIcon.addEventListener('click', function() {
+                    navbar.classList.add('active', 'show');
+                });
+            
+                closeIcon.addEventListener('click', function() {
                     navbar.classList.remove('show');
                     setTimeout(() => navbar.classList.remove('active'), 300); // Delay removal to match transition time
-                }
+                });
+            
+                // Close navbar when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!navbar.contains(event.target) && !menuIcon.contains(event.target) && !closeIcon.contains(event.target)) {
+                        navbar.classList.remove('show');
+                        setTimeout(() => navbar.classList.remove('active'), 300); // Delay removal to match transition time
+                    }
+                });
             });
-        });
-        
-        
-
-        
-            document.addEventListener('DOMContentLoaded', function() {
-                const nameElement = document.getElementById('name');
-                const roleElement = document.getElementById('role');
             
-                const names = ['Nickson'];
-                const roles = ["Web Developer", "Creative Problem Solver", "Tech Enthusiast", "Front-End Specialist"];
-            
-                function typeEffect(element, text, callback) {
-                    let index = 0;
-                    let isDeleting = false;
-            
-                    function updateText() {
-                        if (index < text.length && !isDeleting) {
-                            element.innerHTML += text[index++];
-                            setTimeout(updateText, 100); // Adjust typing speed here
-                        } else if (index === text.length && !isDeleting) {
-                            isDeleting = true;
-                            setTimeout(updateText, 2000); // Pause before starting to delete
-                        } else if (isDeleting) {
-                            element.innerHTML = text.slice(0, index--);
-                            if (index < 0) {
-                                isDeleting = false;
-                                setTimeout(callback, 500); // Pause before starting the next effect
-                            } else {
-                                setTimeout(updateText, 50); // Adjust deleting speed here
-                            }
+    
+            // Typing Effect
+            const nameElement = document.getElementById('name');
+            const roleElement = document.getElementById('role');
+            const names = ['Nickson'];
+            const roles = ["Web Developer", "Creative Problem Solver", "Tech Enthusiast", "Front-End Specialist"];
+    
+            function typeEffect(element, text, callback) {
+                let index = 0;
+                let isDeleting = false;
+    
+                function updateText() {
+                    if (index < text.length && !isDeleting) {
+                        element.innerHTML += text[index++];
+                        setTimeout(updateText, 100); // Adjust typing speed here
+                    } else if (index === text.length && !isDeleting) {
+                        isDeleting = true;
+                        setTimeout(updateText, 2000); // Pause before starting to delete
+                    } else if (isDeleting) {
+                        element.innerHTML = text.slice(0, index--);
+                        if (index < 0) {
+                            isDeleting = false;
+                            setTimeout(callback, 500); // Pause before starting the next effect
+                        } else {
+                            setTimeout(updateText, 50); // Adjust deleting speed here
                         }
                     }
-            
-                    updateText();
                 }
-            
-                function startTyping() {
-                    let nameIndex = 0;
-                    let roleIndex = 0;
-            
-                    function cycleText() {
-                        typeEffect(nameElement, names[nameIndex], function() {
-                            nameIndex = (nameIndex + 1) % names.length;
-                            typeEffect(roleElement, roles[roleIndex], function() {
-                                roleIndex = (roleIndex + 1) % roles.length;
-                                setTimeout(cycleText, 2000); // Pause before starting the next role
-                            });
+    
+                updateText();
+            }
+    
+            function startTyping() {
+                let nameIndex = 0;
+                let roleIndex = 0;
+    
+                function cycleText() {
+                    typeEffect(nameElement, names[nameIndex], function() {
+                        nameIndex = (nameIndex + 1) % names.length;
+                        typeEffect(roleElement, roles[roleIndex], function() {
+                            roleIndex = (roleIndex + 1) % roles.length;
+                            setTimeout(cycleText, 2000); // Pause before starting the next role
                         });
-                    }
-            
-                    cycleText();
+                    });
                 }
-            
-                startTyping();
-            });
-            
-            
-
-        document.addEventListener('DOMContentLoaded', function() {
-            // Communication Chart
-            var ctx1 = document.getElementById('communication-chart').getContext('2d');
-            new Chart(ctx1, {
-                type: 'pie',
-                data: {
-                    labels: ['Expert', 'Intermediate', 'Beginner'],
-                    datasets: [{
-                        data: [90, 0, 10],
-                        backgroundColor: ['#e91e63', '#2c3e50', '#34495e']
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(tooltipItem) {
-                                    return tooltipItem.label + ': ' + tooltipItem.raw + '%';
+    
+                cycleText();
+            }
+    
+            startTyping();
+    
+            // Chart.js Initialization
+            function createChart(elementId, data) {
+                var ctx = document.getElementById(elementId).getContext('2d');
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Expert', 'Intermediate', 'Beginner'],
+                        datasets: [{
+                            data: data,
+                            backgroundColor: ['#e91e63', '#2c3e50', '#34495e']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(tooltipItem) {
+                                        return tooltipItem.label + ': ' + tooltipItem.raw + '%';
+                                    }
                                 }
                             }
                         }
                     }
-                }
-            });
-        
-            // Creativity Chart
-            var ctx2 = document.getElementById('creativity-chart').getContext('2d');
-            new Chart(ctx2, {
-                type: 'pie',
-                data: {
-                    labels: ['Expert', 'Intermediate', 'Beginner'],
-                    datasets: [{
-                        data: [85, 10, 5],
-                        backgroundColor: ['#e91e63', '#2c3e50', '#34495e']
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(tooltipItem) {
-                                    return tooltipItem.label + ': ' + tooltipItem.raw + '%';
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        
-            // Problem Solving Chart
-            var ctx3 = document.getElementById('problem-solving-chart').getContext('2d');
-            new Chart(ctx3, {
-                type: 'pie',
-                data: {
-                    labels: ['Expert', 'Intermediate', 'Beginner'],
-                    datasets: [{
-                        data: [80, 15, 5],
-                        backgroundColor: ['#e91e63', '#2c3e50', '#34495e']
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(tooltipItem) {
-                                    return tooltipItem.label + ': ' + tooltipItem.raw + '%';
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        
-            // Time Management Chart
-            var ctx4 = document.getElementById('time-management-chart').getContext('2d');
-            new Chart(ctx4, {
-                type: 'pie',
-                data: {
-                    labels: ['Expert', 'Intermediate', 'Beginner'],
-                    datasets: [{
-                        data: [75, 20, 5],
-                        backgroundColor: ['#e91e63', '#2c3e50', '#34495e']
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(tooltipItem) {
-                                    return tooltipItem.label + ': ' + tooltipItem.raw + '%';
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        
-            // Leadership Chart
-            var ctx5 = document.getElementById('leadership-chart').getContext('2d');
-            new Chart(ctx5, {
-                type: 'pie',
-                data: {
-                    labels: ['Expert', 'Intermediate', 'Beginner'],
-                    datasets: [{
-                        data: [70, 25, 5],
-                        backgroundColor: ['#e91e63', '#2c3e50', '#34495e']
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(tooltipItem) {
-                                    return tooltipItem.label + ': ' + tooltipItem.raw + '%';
-                                }
-                            }
-                        }
-                    }
-                }
-            });
+                });
+            }
+    
+            // Initialize Charts
+            createChart('communication-chart', [90, 0, 10]);
+            createChart('creativity-chart', [85, 10, 5]);
+            createChart('problem-solving-chart', [80, 15, 5]);
+            createChart('time-management-chart', [75, 20, 5]);
+            createChart('leadership-chart', [70, 25, 5]);
         });
-        
-</script>
+    </script>
+    
 
     
 </body>
