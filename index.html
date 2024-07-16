@@ -22,85 +22,100 @@
         }
         
         /* Header */
-        .header {
-            background: #1e1e1e; /* Dark background for header */
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #f4f4f4;
-            position: relative; /* To position the menu icon and close icon */
-        }
-        
-        .header .logo {
-            font-size: 1.5em;
-            color: #61dafb; /* Accent color for logo */
-            text-decoration: none;
-        }
-        
-        .header .menu-icon,
-        .header .close-icon {
-            display: none;
-        }
-        
-        .header .navbar {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .header .navbar a {
-            color: #f4f4f4;
-            text-decoration: none;
-            font-size: 1em;
-            padding: 10px;
-            transition: color 0.3s, background-color 0.3s; /* Smooth transitions */
-            border-radius: 5px; /* Rounded corners for links */
-        }
-        
-        .header .navbar a:hover,
-        .header .navbar a.active {
-            color: #61dafb; /* Accent color on hover or active state */
-            background-color: #333; /* Darker background on hover */
-        }
-        
-        /* Mobile Menu */
-        .menu-icon {
-            display: block;
-            font-size: 1.5em;
-            cursor: pointer;
-        }
-        
-        .navbar {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .navbar.active {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            background: #1e1e1e; /* Match header background */
-            position: absolute;
-            top: 60px; /* Adjust based on header height */
-            left: 0;
-            padding: 10px 0;
-            z-index: 1000; /* Ensure it appears above other content */
-        }
-        
-        .navbar a {
-            padding: 15px;
-            text-align: center;
-        }
-        
-        .close-icon {
-            display: block;
-            font-size: 1.5em;
-            cursor: pointer;
-            color: #f4f4f4;
-            text-align: right;
-            padding: 10px;
-        }
-        
+        /* Header */
+.header {
+    background: #1e1e1e; /* Dark background for header */
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #f4f4f4;
+    position: fixed; /* Fixed position at the top */
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width */
+    z-index: 1000; /* Ensure it appears above other content */
+    transition: background-color 0.3s; /* Optional: Transition for background color on scroll */
+}
+
+/* Adjust for mobile screens */
+.header .logo {
+    font-size: 1.5em;
+    color: #61dafb; /* Accent color for logo */
+    text-decoration: none;
+}
+
+.header .menu-icon,
+.header .close-icon {
+    display: none;
+}
+
+.header .navbar {
+    display: flex;
+    gap: 15px;
+}
+
+.header .navbar a {
+    color: #f4f4f4;
+    text-decoration: none;
+    font-size: 1em;
+    padding: 10px;
+    transition: color 0.3s, background-color 0.3s; /* Smooth transitions */
+    border-radius: 5px; /* Rounded corners for links */
+}
+
+.header .navbar a:hover,
+.header .navbar a.active {
+    color: #61dafb; /* Accent color on hover or active state */
+    background-color: #333; /* Darker background on hover */
+}
+
+//* Mobile Menu */
+.menu-icon {
+    display: block; /* Show menu icon on mobile screens */
+}
+
+.navbar {
+    display: flex;
+    gap: 15px;
+}
+.navbar {
+    display: flex;
+    gap: 15px;
+}
+
+.navbar.active {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: #1e1e1e; /* Match header background */
+    position: fixed; /* Keep the navbar fixed */
+    top: 60px; /* Adjust based on header height */
+    left: 0;
+    padding: 10px 0;
+    z-index: 1000; /* Ensure it appears above other content */
+    transform: translateY(-100%); /* Start hidden */
+    transition: transform 0.3s; /* Smooth transition */
+}
+
+.navbar.active.show {
+    transform: translateY(0); /* Slide down when active */
+}
+
+.navbar a {
+    padding: 15px;
+    text-align: center;
+}
+
+.close-icon {
+    display: block;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #f4f4f4;
+    text-align: right;
+    padding: 10px;
+}
+
         /* Home Section */
         .home {
             display: flex;
@@ -772,6 +787,7 @@
             <a href="#contact">Contact</a>
         </nav>
     </header>
+    
     <section class="home">
         <div class="home-content" data-aos="fade-up">
             <div class="text" data-aos="fade-right">
@@ -1011,25 +1027,31 @@
                 once: true // Whether animation should happen only once
             });
         });
-        const menuIcon = document.getElementById('menu-icon');
-        const closeIcon = document.getElementById('close-icon');
-        const navbar = document.getElementById('navbar');
-
-        menuIcon.addEventListener('click', () => {
-            navbar.classList.add('active');
-        });
-
-        closeIcon.addEventListener('click', () => {
-            navbar.classList.remove('active');
-        });
-
-        // Close the navbar when a link is clicked (optional)
-        const navLinks = document.querySelectorAll('.navbar a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                navbar.classList.remove('active');
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+            const navbar = document.getElementById('navbar');
+        
+            // Toggle navbar visibility
+            menuIcon.addEventListener('click', function() {
+                navbar.classList.add('active', 'show');
+            });
+        
+            closeIcon.addEventListener('click', function() {
+                navbar.classList.remove('show');
+                setTimeout(() => navbar.classList.remove('active'), 300); // Delay removal to match transition time
+            });
+        
+            // Close navbar when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!navbar.contains(event.target) && !menuIcon.contains(event.target)) {
+                    navbar.classList.remove('show');
+                    setTimeout(() => navbar.classList.remove('active'), 300); // Delay removal to match transition time
+                }
             });
         });
+        
+        
 
         
             document.addEventListener('DOMContentLoaded', function() {
