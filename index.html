@@ -1025,20 +1025,23 @@
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@1.34.0/tsparticles.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize AOS (Animate On Scroll)
-            AOS.init({
-                duration: 1000, // Animation duration in ms
-                once: true // Whether animation should happen only once
-            });
+        <script>
             document.addEventListener('DOMContentLoaded', function() {
+                // Initialize AOS (Animate On Scroll)
+                AOS.init({
+                    duration: 1000, // Animation duration in ms
+                    once: true // Whether animation should happen only once
+                });
+    
+                // Navbar toggle functionality
                 const menuIcon = document.getElementById('menu-icon');
                 const closeIcon = document.getElementById('close-icon');
                 const navbar = document.getElementById('navbar');
             
-                // Toggle navbar visibility
                 menuIcon.addEventListener('click', function() {
                     navbar.classList.add('active', 'show');
                 });
@@ -1048,105 +1051,124 @@
                     setTimeout(() => navbar.classList.remove('active'), 300); // Delay removal to match transition time
                 });
             
-                // Close navbar when clicking outside
                 document.addEventListener('click', function(event) {
                     if (!navbar.contains(event.target) && !menuIcon.contains(event.target) && !closeIcon.contains(event.target)) {
                         navbar.classList.remove('show');
                         setTimeout(() => navbar.classList.remove('active'), 300); // Delay removal to match transition time
                     }
                 });
-            });
-            
     
-            // Typing Effect
-            const nameElement = document.getElementById('name');
-            const roleElement = document.getElementById('role');
-            const names = ['Nickson'];
-            const roles = ["Web Developer", "Creative Problem Solver", "Tech Enthusiast", "Front-End Specialist"];
-    
-            function typeEffect(element, text, callback) {
-                let index = 0;
-                let isDeleting = false;
-    
-                function updateText() {
-                    if (index < text.length && !isDeleting) {
-                        element.innerHTML += text[index++];
-                        setTimeout(updateText, 100); // Adjust typing speed here
-                    } else if (index === text.length && !isDeleting) {
-                        isDeleting = true;
-                        setTimeout(updateText, 2000); // Pause before starting to delete
-                    } else if (isDeleting) {
-                        element.innerHTML = text.slice(0, index--);
-                        if (index < 0) {
-                            isDeleting = false;
-                            setTimeout(callback, 500); // Pause before starting the next effect
-                        } else {
-                            setTimeout(updateText, 50); // Adjust deleting speed here
+                // Typing Effect
+                const nameElement = document.getElementById('name');
+                const roleElement = document.getElementById('role');
+                const names = ['Nickson'];
+                const roles = ["Web Developer", "Creative Problem Solver", "Tech Enthusiast", "Front-End Specialist"];
+        
+                function typeEffect(element, text, callback) {
+                    let index = 0;
+                    let isDeleting = false;
+        
+                    function updateText() {
+                        if (index < text.length && !isDeleting) {
+                            element.innerHTML += text[index++];
+                            setTimeout(updateText, 100); // Adjust typing speed here
+                        } else if (index === text.length && !isDeleting) {
+                            isDeleting = true;
+                            setTimeout(updateText, 2000); // Pause before starting to delete
+                        } else if (isDeleting) {
+                            element.innerHTML = text.slice(0, index--);
+                            if (index < 0) {
+                                isDeleting = false;
+                                setTimeout(callback, 500); // Pause before starting the next effect
+                            } else {
+                                setTimeout(updateText, 50); // Adjust deleting speed here
+                            }
                         }
                     }
+        
+                    updateText();
                 }
-    
-                updateText();
-            }
-    
-            function startTyping() {
-                let nameIndex = 0;
-                let roleIndex = 0;
-    
-                function cycleText() {
-                    typeEffect(nameElement, names[nameIndex], function() {
-                        nameIndex = (nameIndex + 1) % names.length;
-                        typeEffect(roleElement, roles[roleIndex], function() {
-                            roleIndex = (roleIndex + 1) % roles.length;
-                            setTimeout(cycleText, 2000); // Pause before starting the next role
+        
+                function startTyping() {
+                    let nameIndex = 0;
+                    let roleIndex = 0;
+        
+                    function cycleText() {
+                        typeEffect(nameElement, names[nameIndex], function() {
+                            nameIndex = (nameIndex + 1) % names.length;
+                            typeEffect(roleElement, roles[roleIndex], function() {
+                                roleIndex = (roleIndex + 1) % roles.length;
+                                setTimeout(cycleText, 2000); // Pause before starting the next role
+                            });
                         });
-                    });
+                    }
+        
+                    cycleText();
                 }
+        
+                startTyping();
     
-                cycleText();
-            }
-    
-            startTyping();
-    
-            // Chart.js Initialization
-            function createChart(elementId, data) {
-                var ctx = document.getElementById(elementId).getContext('2d');
-                new Chart(ctx, {
-                    type: 'pie',
-                    data: {
-                        labels: ['Expert', 'Intermediate', 'Beginner'],
-                        datasets: [{
-                            data: data,
-                            backgroundColor: ['#e91e63', '#2c3e50', '#34495e']
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            legend: {
-                                display: false
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(tooltipItem) {
-                                        return tooltipItem.label + ': ' + tooltipItem.raw + '%';
+                // Chart.js Initialization
+                function createChart(elementId, data) {
+                    var ctx = document.getElementById(elementId).getContext('2d');
+                    new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: ['Expert', 'Intermediate', 'Beginner'],
+                            datasets: [{
+                                data: data,
+                                backgroundColor: ['#e91e63', '#2c3e50', '#34495e']
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    display: false
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(tooltipItem) {
+                                            return tooltipItem.label + ': ' + tooltipItem.raw + '%';
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
-                });
-            }
+                    });
+                }
+        
+                // Initialize Charts
+                createChart('communication-chart', [90, 0, 10]);
+                createChart('creativity-chart', [85, 10, 5]);
+                createChart('problem-solving-chart', [80, 15, 5]);
+                createChart('time-management-chart', [75, 20, 5]);
+                createChart('leadership-chart', [70, 25, 5]);
     
-            // Initialize Charts
-            createChart('communication-chart', [90, 0, 10]);
-            createChart('creativity-chart', [85, 10, 5]);
-            createChart('problem-solving-chart', [80, 15, 5]);
-            createChart('time-management-chart', [75, 20, 5]);
-            createChart('leadership-chart', [70, 25, 5]);
-        });
-    </script>
-    
+                // Contact Form Handling
+                const contactForm = document.getElementById('contact-form');
+                const responseMessage = document.getElementById('response-message');
+            
+                const handleSubmit = function(event) {
+                    event.preventDefault(); // Prevent the default form submission
+                    
+                    const formData = new FormData(contactForm);
+                    const name = formData.get('name');
+            
+                    responseMessage.textContent = `Thank you, ${name}! Your message has been sent successfully.`;
+                    responseMessage.style.display = 'block'; // Ensure the message is visible
+            
+                    contactForm.reset(); // Clear form fields
+            
+                    setTimeout(() => {
+                        responseMessage.textContent = '';
+                        responseMessage.style.display = 'none'; // Hide the message
+                    }, 5000);
+                };
+            
+                contactForm.addEventListener('submit', handleSubmit);
+            });
+        </script>
 
     
 </body>
